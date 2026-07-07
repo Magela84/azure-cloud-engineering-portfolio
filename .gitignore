@@ -1,0 +1,34 @@
+# ---- Word docs & personal notes (kept out of the public portfolio) ----
+*.docx
+
+# ---- The starter template lives in its own repo ----
+Starter-Template-Secure-Baseline/
+
+# ---- Terraform state & working dirs — NEVER commit ----
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+*.tfvars.json
+*.tfplan
+
+# ---- Bicep compiled output ----
+*.arm.json
+main.json
+
+# ---- Secrets / credentials ----
+*.pem
+*.key
+*.pfx
+.env
+.env.*
+secrets.json
+azureauth.json
+
+# ---- OS / editor noise ----
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
