@@ -1,0 +1,66 @@
+# =====================================================================
+# EXAMPLE (reference only) — Continuous DEPLOYMENT with an approval gate.
+#
+# The validate-iac.yml workflow (already live) is the CI half: it CHECKS
+# your templates on every change. This example is the CD half: it DEPLOYS
+# them to Azure, but only after a human approves.
+#
+# It is NOT active by default because deploying needs Azure credentials:
+#   1. Create an app registration + federated credential (OIDC), or a
+#      service principal, with rights to deploy to your subscription.
+#   2. Add three repository secrets:
+#        AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID
+#   3. Create a GitHub Environment named "production" and add a required
+#      reviewer — that reviewer approval IS the deployment gate.
+#
+# Note: some school/work Azure tenants block creating app registrations,
+# so this may need an admin. The CI (validate) workflow needs none of this.
+# =====================================================================
+name: Deploy Infrastructure (example)
+
+on:
+  workflow_dispatch:      # start it by hand from the Actions tab
+
+permissions:
+  id-token: write         # required for passwordless (OIDC) sign-in
+  contents: read
+
+jobs:
+  preview:
+    name: Preview changes (what-if)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sign in to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: What-if (show what would change)
+        run: |
+          az deployment sub what-if \
+            --location eastus \
+            --template-file azure-iac-secure-baseline/bicep/main.bicep \
+            --parameters @azure-iac-secure-baseline/bicep/main.parameters.json
+
+  deploy:
+    name: Deploy (needs approval)
+    needs: preview
+    runs-on: ubuntu-latest
+    environment: production   # <-- the approval gate: a reviewer must approve here
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sign in to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Deploy the template
+        run: |
+          az deployment sub create \
+            --location eastus \
+            --name ci-deploy \
+            --template-file azure-iac-secure-baseline/bicep/main.bicep \
+            --parameters @azure-iac-secure-baseline/bicep/main.parameters.json

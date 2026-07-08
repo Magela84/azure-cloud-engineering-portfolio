@@ -1,0 +1,52 @@
+name: Validate Infrastructure
+
+# The "robot" runs automatically on every push and pull request to main,
+# and can also be started by hand from the Actions tab (workflow_dispatch).
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  bicep-validate:
+    name: Compile Bicep templates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Install Bicep
+        run: az bicep install
+
+      - name: Compile Bicep templates (fails the build on any error)
+        run: |
+          set -e
+          templates=(
+            "azure-iac-secure-baseline/bicep/main.bicep"
+            "azure-devops-cicd/bicep/main.bicep"
+          )
+          for t in "${templates[@]}"; do
+            echo "::group::Building $t"
+            az bicep build --file "$t"
+            echo "OK: $t"
+            echo "::endgroup::"
+          done
+          echo "All Bicep templates compiled successfully."
+
+  terraform-validate:
+    name: Validate Terraform
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Init (no backend) and validate
+        working-directory: azure-iac-secure-baseline/terraform
+        run: |
+          terraform init -backend=false -input=false
+          terraform validate
