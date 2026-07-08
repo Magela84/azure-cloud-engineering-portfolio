@@ -19,6 +19,7 @@ Hands-on Azure infrastructure projects built with Infrastructure as Code (Bicep 
 | [azure-devops-cicd](./azure-devops-cicd) | DevOps / CI-CD | A **GitHub Actions** pipeline that automatically compiles Bicep and validates Terraform on every push, plus a reference **deploy-with-approval** workflow. |
 | [azure-finops-cost](./azure-finops-cost) | FinOps / Cost Optimization | A **budget with email alerts**, **cost tags** for chargeback, a real **cost review** (finding idle resources), tag-enforcement policy, and the optimization levers. |
 | [azure-administration](./azure-administration) | Azure Administration | **Resource locks** (blocking deletion), **tags at scale**, **storage lifecycle** automation, and **Azure Resource Graph** inventory — the day-to-day management skills. |
+| [azure-powershell-cli-automation](./azure-powershell-cli-automation) | PowerShell, CLI & Automation | Azure **CLI vs PowerShell** side by side, a reusable **cloud-report** automation script, and **Azure Automation** for cloud-native scheduled runbooks. |
 
 > A reusable, production-leaning **secure-baseline starter template** is maintained in its own repository.
 
