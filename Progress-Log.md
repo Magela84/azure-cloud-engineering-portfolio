@@ -12,6 +12,7 @@ A running record of completed labs. Add a row each time you finish one.
 | 2026-07-08 | Monitoring | Monitoring & Observability | ✅ Completed | ~1h | Log Analytics workspace + storage + diagnostic setting via Bicep. Read near-real-time metrics (Transactions/Availability), Activity Log audit trail, KQL over AzureMetrics (where/project/summarize), and created a metric alert. RCA: log ingestion latency (~5–15 min) vs instant metrics API. Teardown done. |
 | 2026-07-08 | DevOps | CI/CD with GitHub Actions | ✅ Completed | ~45m | Live GitHub Actions pipeline validating Bicep + Terraform on every push (green check confirmed). Reference deploy-with-approval workflow (OIDC + environment gate). RCA: push rejected without `workflow` token scope — fixed via PAT. Runs in GitHub, not Cloud Shell. |
 | 2026-07-08 | FinOps | Cost Management & Optimization | ✅ Completed | ~1h | Budget with actual + forecast email alerts (Bicep, sub scope); cost tags for allocation; real cost review surfaced 3 forgotten (deallocated) VMs; learned stopped-VM still bills disk/IP; optimization levers. Lab torn down; personal VMs left stopped. |
+| 2026-07-08 | Administration | Azure Administration | ✅ Completed | ~1h | Resource lock (CanNotDelete) proven to block deletion; tags at scale + subscription-wide tag search; storage lifecycle policy (cool at 30d, delete at 365d); Azure Resource Graph inventory via KQL. Lock removed, torn down. Final module. |
 
 <!-- Template row:
 | YYYY-MM-DD | Lab 0X | <skill> | ✅ Completed / ⚠️ Partial | Xh | one-line takeaway |
