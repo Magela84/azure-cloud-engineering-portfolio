@@ -1,6 +1,6 @@
-# Lab 02 — Reusable Modules & Remote State
+# Team-Grade Terraform — Remote State & Reusable Modules
 
-**Skill area:** Infrastructure as Code (production practices) · **Level:** Advanced · **Est. time:** 1.5–2 hrs
+**Domain:** Infrastructure as Code (production practices) · **Stack:** Terraform (azurerm) · Azure Storage backend · Bicep module registry (ACR)
 
 ## Objective
 

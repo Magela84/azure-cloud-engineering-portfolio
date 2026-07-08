@@ -1,6 +1,6 @@
-# Lab 03 — Governance as Code (Azure Policy)
+# Governance as Code — Azure Policy
 
-**Skill area:** Governance / IaC · **Level:** Advanced · **Est. time:** 1–1.5 hrs
+**Domain:** Cloud Governance · **Stack:** Azure Policy (custom + built-in) · Bicep · Terraform (azurerm) · **Effects:** deny + audit at subscription/RG scope
 
 ## Objective
 

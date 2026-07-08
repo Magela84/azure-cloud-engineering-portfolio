@@ -1,6 +1,6 @@
-# Lab 04 — Security & Identity
+# Managed Identity & RBAC — Passwordless Access
 
-**Skill area:** Azure Security & Identity Management · **Level:** Advanced · **Est. time:** 1–1.5 hrs
+**Domain:** Security & Identity · **Stack:** Entra ID · Managed Identity · RBAC (data-plane) · Key Vault · Bicep · **Model:** Azure AD-only auth (no keys)
 
 ## Objective
 

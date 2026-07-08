@@ -15,6 +15,7 @@ Hands-on Azure infrastructure projects built with Infrastructure as Code (Bicep 
 | [azure-policy-governance](./azure-policy-governance) | Governance as Code | A **custom deny policy** (blocks public-blob storage) and a **built-in policy** ("Allowed locations") — enforcing standards automatically across a subscription. |
 | [azure-managed-identity-rbac](./azure-managed-identity-rbac) | Security & Identity | **Managed identity**, **data-plane vs control-plane RBAC**, Key Vault secrets, and storage with account keys disabled (Azure AD-only access). |
 | [azure-private-endpoints](./azure-private-endpoints) | Network Security | Locking storage & Key Vault to **private-only networking** with **Private Endpoints and Private DNS**, including the DNS resolution mechanics. |
+| [azure-monitoring-observability](./azure-monitoring-observability) | Monitoring & Observability | **Log Analytics**, near-real-time **metrics**, the **Activity Log** audit trail, **KQL** queries, and **metric alerts** — the toolset behind real incident troubleshooting. |
 
 > A reusable, production-leaning **secure-baseline starter template** is maintained in its own repository.
 

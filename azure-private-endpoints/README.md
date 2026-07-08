@@ -1,6 +1,6 @@
-# Lab 05 — Secrets, Encryption & Network Security
+# Private-Only Networking — Private Endpoints & DNS
 
-**Skill area:** Azure Security & Identity Management (network) · **Level:** Advanced · **Est. time:** 1.5 hrs
+**Domain:** Network Security · **Stack:** Azure VNet · Private Endpoints · Private DNS · Bicep · **Goal:** remove public exposure from Storage & Key Vault
 
 ## Objective
 

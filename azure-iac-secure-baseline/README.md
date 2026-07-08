@@ -1,6 +1,6 @@
-# Lab 01 — IaC Foundations with Bicep & Terraform
+# Secure Baseline Infrastructure — Bicep & Terraform
 
-**Skill area:** Infrastructure as Code · **Level:** Advanced · **Est. time:** 1.5–2 hrs
+**Domain:** Infrastructure as Code · **Stack:** Azure CLI · Bicep · Terraform (azurerm) · **Scope:** VNet + NSG + hardened Storage + RBAC Key Vault
 
 ## Objective
 
