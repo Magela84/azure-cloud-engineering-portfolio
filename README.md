@@ -2,7 +2,7 @@
 
 Hands-on Azure infrastructure projects built with Infrastructure as Code (Bicep & Terraform), covering the full engineering stack: deployment, team-grade IaC, governance, identity, and network security. Each project was deployed to a live Azure subscription, verified, documented, and torn down.
 
-**Author:** Magela · **Tools:** Azure CLI · Bicep · Terraform · Azure Policy · Entra ID / RBAC · Git
+**Author:** Magela · **Tools:** Azure CLI · Bicep · Terraform · Azure Policy · Entra ID / RBAC · Azure AI Services · Log Analytics · GitHub Actions · Git
 
 ---
 
@@ -20,6 +20,7 @@ Hands-on Azure infrastructure projects built with Infrastructure as Code (Bicep 
 | [azure-finops-cost](./azure-finops-cost) | FinOps / Cost Optimization | A **budget with email alerts**, **cost tags** for chargeback, a real **cost review** (finding idle resources), tag-enforcement policy, and the optimization levers. |
 | [azure-administration](./azure-administration) | Azure Administration | **Resource locks** (blocking deletion), **tags at scale**, **storage lifecycle** automation, and **Azure Resource Graph** inventory — the day-to-day management skills. |
 | [azure-powershell-cli-automation](./azure-powershell-cli-automation) | PowerShell, CLI & Automation | Azure **CLI vs PowerShell** side by side, a reusable **cloud-report** automation script, and **Azure Automation** for cloud-native scheduled runbooks. |
+| [azure-ai-secure-deployment](./azure-ai-secure-deployment) | AI on Azure (secure) | An **Azure AI Services** account deployed via Bicep with **API keys disabled** (Azure AD-only), a **managed identity**, **Cognitive Services User** RBAC, and logs/metrics to **Log Analytics** — running AI securely and cost-consciously. |
 
 > A reusable, production-leaning **secure-baseline starter template** is maintained in its own repository.
 
@@ -31,6 +32,7 @@ Hands-on Azure infrastructure projects built with Infrastructure as Code (Bicep 
 - **Security & Identity** — RBAC (control-plane vs data-plane), managed identities, Key Vault, disabling shared-key access, least privilege.
 - **Network Security** — Private Endpoints, Private DNS, disabling public network access.
 - **Governance** — Azure Policy as code (custom + built-in, deny vs audit, scope inheritance).
+- **AI on Azure (secure)** — deploying AI Services as code with keys disabled, managed identity, data-plane RBAC, monitoring, and token-cost awareness.
 - **Troubleshooting / RCA** — diagnosing issues against live resources and resolving them methodically (documented in each project's notes).
 
 ## How each project is organized
