@@ -16,6 +16,8 @@ Hands-on Azure infrastructure projects built with Infrastructure as Code (Bicep 
 | [azure-managed-identity-rbac](./azure-managed-identity-rbac) | Security & Identity | **Managed identity**, **data-plane vs control-plane RBAC**, Key Vault secrets, and storage with account keys disabled (Azure AD-only access). |
 | [azure-private-endpoints](./azure-private-endpoints) | Network Security | Locking storage & Key Vault to **private-only networking** with **Private Endpoints and Private DNS**, including the DNS resolution mechanics. |
 | [azure-monitoring-observability](./azure-monitoring-observability) | Monitoring & Observability | **Log Analytics**, near-real-time **metrics**, the **Activity Log** audit trail, **KQL** queries, and **metric alerts** — the toolset behind real incident troubleshooting. |
+| [azure-devops-cicd](./azure-devops-cicd) | DevOps / CI-CD | A **GitHub Actions** pipeline that automatically compiles Bicep and validates Terraform on every push, plus a reference **deploy-with-approval** workflow. |
+| [azure-finops-cost](./azure-finops-cost) | FinOps / Cost Optimization | A **budget with email alerts**, **cost tags** for chargeback, a real **cost review** (finding idle resources), tag-enforcement policy, and the optimization levers. |
 
 > A reusable, production-leaning **secure-baseline starter template** is maintained in its own repository.
 
