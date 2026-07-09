@@ -21,6 +21,7 @@ Hands-on Azure infrastructure projects built with Infrastructure as Code (Bicep 
 | [azure-administration](./azure-administration) | Azure Administration | **Resource locks** (blocking deletion), **tags at scale**, **storage lifecycle** automation, and **Azure Resource Graph** inventory — the day-to-day management skills. |
 | [azure-powershell-cli-automation](./azure-powershell-cli-automation) | PowerShell, CLI & Automation | Azure **CLI vs PowerShell** side by side, a reusable **cloud-report** automation script, and **Azure Automation** for cloud-native scheduled runbooks. |
 | [azure-ai-secure-deployment](./azure-ai-secure-deployment) | AI on Azure (secure) | An **Azure AI Services** account deployed via Bicep with **API keys disabled** (Azure AD-only), a **managed identity**, **Cognitive Services User** RBAC, and logs/metrics to **Log Analytics** — running AI securely and cost-consciously. |
+| [azure-aks-containers](./azure-aks-containers) | Kubernetes & Containers | A containerized app on **AKS**, deployed with a **Helm** chart, pulling from a private **ACR** via the cluster's **managed identity** (no `imagePullSecret`). Probes, resource limits, scaling, and proven **self-healing**. |
 
 > A reusable, production-leaning **secure-baseline starter template** is maintained in its own repository.
 
@@ -32,6 +33,7 @@ Hands-on Azure infrastructure projects built with Infrastructure as Code (Bicep 
 - **Security & Identity** — RBAC (control-plane vs data-plane), managed identities, Key Vault, disabling shared-key access, least privilege.
 - **Network Security** — Private Endpoints, Private DNS, disabling public network access.
 - **Governance** — Azure Policy as code (custom + built-in, deny vs audit, scope inheritance).
+- **Kubernetes & Containers** — AKS, ACR, Helm charts, managed-identity image pulls, probes, requests/limits, scaling, and the reconcile loop.
 - **AI on Azure (secure)** — deploying AI Services as code with keys disabled, managed identity, data-plane RBAC, monitoring, and token-cost awareness.
 - **Troubleshooting / RCA** — diagnosing issues against live resources and resolving them methodically (documented in each project's notes).
 

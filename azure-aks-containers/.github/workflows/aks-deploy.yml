@@ -1,0 +1,95 @@
+# =====================================================================
+# REFERENCE WORKFLOW — build a container image in ACR and deploy it to
+# AKS with Helm on every push to main.
+#
+# Not run live on the student subscription: `az ad sp create-for-rbac`
+# and OIDC federated credentials require app-registration rights that
+# a student tenant blocks. Everything here is production-shaped.
+#
+# To run it for real you need one repo secret:
+#   AZURE_CREDENTIALS  — output of:
+#     az ad sp create-for-rbac --name gh-aks --role Contributor \
+#       --scopes /subscriptions/<sub-id>/resourceGroups/aks-rg --json-auth
+#
+# Better still, use OIDC (no long-lived secret at all) via
+# azure/login@v2 with client-id / tenant-id / subscription-id.
+# =====================================================================
+name: Build and deploy to AKS
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'azure-aks-containers/**'
+  workflow_dispatch:
+
+env:
+  RESOURCE_GROUP: aks-rg
+  CLUSTER_NAME: aks-lab
+  ACR_NAME: ${{ secrets.ACR_NAME }}
+  IMAGE: portfolio-app
+  CHART_PATH: azure-aks-containers/helm/portfolio-app
+  APP_PATH: azure-aks-containers/app
+
+jobs:
+  build:
+    name: Build image in ACR
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.meta.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Tag with the commit SHA so every deploy is traceable to a commit.
+      - id: meta
+        run: echo "tag=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
+      - uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # ACR Tasks builds the image in Azure — no Docker on the runner.
+      - name: Build and push image
+        run: |
+          az acr build \
+            --registry "$ACR_NAME" \
+            --image "$IMAGE:${{ steps.meta.outputs.tag }}" \
+            --image "$IMAGE:latest" \
+            "$APP_PATH"
+
+  deploy:
+    name: Deploy to AKS
+    needs: build
+    runs-on: ubuntu-latest
+    # An Environment with a required reviewer turns this into an approval gate.
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Get cluster credentials
+        run: az aks get-credentials -g "$RESOURCE_GROUP" -n "$CLUSTER_NAME" --overwrite-existing
+
+      # Render the templates first — the Kubernetes equivalent of what-if / plan.
+      - name: Preview rendered manifests
+        run: |
+          helm template portfolio "$CHART_PATH" \
+            --set image.repository="$ACR_NAME.azurecr.io/$IMAGE" \
+            --set image.tag="${{ needs.build.outputs.tag }}"
+
+      - name: Deploy with Helm
+        run: |
+          helm upgrade --install portfolio "$CHART_PATH" \
+            --set image.repository="$ACR_NAME.azurecr.io/$IMAGE" \
+            --set image.tag="${{ needs.build.outputs.tag }}" \
+            --wait --timeout 5m
+
+      # If the rollout doesn't converge, fail the job loudly.
+      - name: Verify rollout
+        run: |
+          kubectl rollout status deployment/portfolio --timeout=120s
+          kubectl get pods -l app=portfolio
+          kubectl get svc portfolio

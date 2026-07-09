@@ -1,0 +1,33 @@
+# Values are the "parameters" of a Helm chart — same idea as Bicep params
+# or Terraform variables. Override at install time with --set or -f.
+
+# How many copies of the pod to run.
+replicaCount: 2
+
+image:
+  # Set this at install time: --set image.repository=<acr>.azurecr.io/portfolio-app
+  repository: REPLACE_ME.azurecr.io/portfolio-app
+  tag: "v1"
+  pullPolicy: IfNotPresent
+
+service:
+  # LoadBalancer gives the app a public IP. Use ClusterIP to stay private
+  # (then reach it with `kubectl port-forward`).
+  type: LoadBalancer
+  port: 80
+  targetPort: 80
+
+# Requests = what the scheduler reserves. Limits = the hard ceiling.
+# Without these, one bad pod can starve the whole node.
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
+
+# Kubernetes restarts the container if liveness fails, and holds traffic
+# back until readiness passes. This is what "self-healing" actually means.
+probes:
+  enabled: true

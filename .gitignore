@@ -32,3 +32,6 @@ Thumbs.db
 Desktop.ini
 .vscode/
 .idea/
+
+# Website lives in its own repo
+portfolio-website/

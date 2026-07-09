@@ -1,0 +1,10 @@
+apiVersion: v2
+name: portfolio-app
+description: A minimal Helm chart deploying a containerized app to AKS.
+type: application
+
+# The chart's own version (bump when you change the chart).
+version: 0.1.0
+
+# The version of the app being deployed (shown by `helm list`).
+appVersion: "1.0.0"
